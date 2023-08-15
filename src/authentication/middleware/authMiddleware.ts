@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { NextFunction, Request, Response } from "express";
+import passport from "passport";
 
 const signupSchema = Joi.object({
   email: Joi.string().email().required(),
@@ -31,4 +32,6 @@ const createRequestBodyValidator = (schema: Joi.ObjectSchema) => {
 const validateSignup = createRequestBodyValidator(signupSchema);
 const validateLogin = createRequestBodyValidator(loginSchema);
 
-export default { validateSignup, validateLogin };
+const jwtAuthenticator = passport.authenticate("jwt", { session: false });
+
+export default { validateSignup, validateLogin,jwtAuthenticator };

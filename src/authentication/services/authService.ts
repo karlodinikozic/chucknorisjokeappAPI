@@ -1,6 +1,7 @@
 import { LoginInputDTO, SignupInputDTO } from "../DTO/types";
 import { User } from "../models/User";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const signup = async (signupInputDTO: SignupInputDTO) => {
   const { email, password, firstName, lastName } = signupInputDTO;
@@ -34,7 +35,13 @@ const login = async ({ email, password }: LoginInputDTO) => {
   if (!passwordsMatch) {
     throw new Error("Invalid credentials");
   }
-  return user;
+
+  const key = process.env.SECRET_KEY || "";
+
+  const accessToken = jwt.sign({ id: user.id, email: user.email }, key, {
+    expiresIn: "1h",
+  });
+  return { accessToken };
 };
 
 export default { signup, login };

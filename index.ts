@@ -1,10 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from 'cors';
-import authenticationApp from "./src/authentication";
+
+dotenv.config(); // * Importing Environment variables
+import "./config/passport.config" // * Passport Config
+
 import {initializeDatabase} from "./src/database/initializeDatabase";
 
-dotenv.config();
+import authenticationApp from "./src/authentication";
+import jokeApp from "./src/joke";
 
 const app = express();
 const port = process.env.PORT;
@@ -22,6 +26,9 @@ app.use(express.json())
 
 //Routes
 app.use(authenticationApp)
+//Protected Routes
+app.use(jokeApp)
+
 
 
 app.get("/", (req, res) => {

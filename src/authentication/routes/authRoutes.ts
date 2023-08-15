@@ -8,4 +8,5 @@ authRouter.post('/signup', authMiddleware.validateSignup,authController.signup)
 
 authRouter.post('/login',authMiddleware.validateLogin, authController.login);
 
+
 export default authRouter;
