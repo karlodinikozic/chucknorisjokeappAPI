@@ -30,6 +30,7 @@
   "dependencies": {
     "@types/passport": "^1.0.12",
     "@types/passport-jwt": "^3.0.9",
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
