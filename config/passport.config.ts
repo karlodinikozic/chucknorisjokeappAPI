@@ -8,9 +8,9 @@ const jwtOptions = {
 };
 
 passport.use(
-  new JwtStrategy(jwtOptions, (payload, done) => {
+  new JwtStrategy(jwtOptions, async (payload, done) => {
     try {
-      const user = User.findOne({ where: { id: payload.id } });
+      const user = await User.findOne({ where: { id: payload.id } });
 
       if (user) {
         return done(null, user);
