@@ -8,6 +8,7 @@ class User extends Model {
   public password!: string;
   public firstName!: string;
   public lastName!: string;
+  public isVerified?: boolean;
 
   // Timestamps
   public readonly createdAt!: Date;
@@ -38,6 +39,10 @@ User.init(
     lastName: {
       type: DataType.STRING(100),
       allowNull: false,
+    },
+    isVerified: {
+      type: DataType.BOOLEAN,
+      defaultValue: false,
     },
   },
   {

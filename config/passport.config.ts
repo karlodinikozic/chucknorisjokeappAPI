@@ -1,6 +1,6 @@
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
 import passport from "passport";
-import { User } from "../src/authentication/models/User";
+import { User } from "../src/user/models/User";
 
 const jwtOptions = {
   secretOrKey: process.env.SECRET_KEY, // Replace with your secret key

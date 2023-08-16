@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { User } from "../../authentication/models/User";
+import { User } from "../models/User";
 
 const getLoggedInUser = (req: Request) => {
   return req.user;

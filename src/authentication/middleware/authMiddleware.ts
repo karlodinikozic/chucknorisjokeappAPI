@@ -1,22 +1,21 @@
 import Joi from "joi";
 import { NextFunction, Request, Response } from "express";
 import passport from "passport";
+import jwtHelper from "../../util/jwtHelper";
 
-const signupSchema = Joi.object({
+const emailSchema = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string()
-    .min(8)
-    .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
-    .required(),
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
 });
 
-const loginSchema = Joi.object({
-  email: Joi.string().email().required(),
+const loginSchema = emailSchema.keys({
   password: Joi.string()
     .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
     .required(),
+});
+
+const signupSchema = loginSchema.keys({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
 });
 
 const createRequestBodyValidator = (schema: Joi.ObjectSchema) => {
@@ -29,9 +28,37 @@ const createRequestBodyValidator = (schema: Joi.ObjectSchema) => {
   };
 };
 
-const validateSignup = createRequestBodyValidator(signupSchema);
+const validateEmail = createRequestBodyValidator(emailSchema);
 const validateLogin = createRequestBodyValidator(loginSchema);
+const validateSignup = createRequestBodyValidator(signupSchema);
 
 const jwtAuthenticator = passport.authenticate("jwt", { session: false });
 
-export default { validateSignup, validateLogin,jwtAuthenticator };
+const extractUserIdFromEmailValidationToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const { token } = req.params;
+
+  try {
+    if (!token) {
+      new Error("Missing param token");
+    }
+
+    req.body.id = jwtHelper.jwtVerifyEmail(token);
+    next();
+  } catch (e) {
+    console.error(e);
+    const errorMessage = String(e);
+    return res.status(400).json({ error: errorMessage });
+  }
+};
+
+export default {
+  validateEmail,
+  validateLogin,
+  validateSignup,
+  jwtAuthenticator,
+  extractUserIdFromEmailValidationToken,
+};

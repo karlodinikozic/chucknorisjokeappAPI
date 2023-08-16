@@ -4,6 +4,6 @@ import userRouter from "./routes/userRouter";
 
 const userApp = express();
 
-userApp.use("/user", authMiddleware.jwtAuthenticator, userRouter);
+userApp.use("/users", authMiddleware.jwtAuthenticator, userRouter);
 
 export default userApp;

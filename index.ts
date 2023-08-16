@@ -31,7 +31,7 @@ app.use(jokeApp);
 app.use(userApp);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello World " + req.protocol + req.hostname);
 });
 
 app.listen(port, () => {
