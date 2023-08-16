@@ -1,0 +1,42 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      PORT: 3000
+      FULL_URL: http://localhost:3000/
+      SECRET_KEY: CHUCKNORIS
+      JOKE_API_URL: https://api.chucknorris.io/
+
+      #EMAIL
+      EMAIL_SECRET: EMAILSECRETECHUCKNORIS
+      EMAIL_USER: mailzaslanjepostenodeexpress@gmail.com
+      EMAIL_KEY: xsmtpsib-35b983fe7d9cedda9f67c0d112317d589f6551a92a5d94404a8536379b249c76-gdXftG95cvSHFkEK
+      EMAIL_PORT: 587
+      EMAIL_HOST: smtp-relay.brevo.com
+
+      #DB
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root_password
+      DB_NAME: chucknoris
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: chucknoris
+      MYSQL_PASSWORD: root_password
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  db-data:

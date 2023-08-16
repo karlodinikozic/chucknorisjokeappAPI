@@ -1,39 +1,42 @@
-import express from "express";
+import express, { Response, Request } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
 dotenv.config(); // * Importing Environment variables
 import "./config/passport.config"; // * Passport Config
 
-import { initializeDatabase } from "./src/database/initializeDatabase";
-
 import authenticationApp from "./src/authentication";
 import jokeApp from "./src/joke";
 import userApp from "./src/user";
+import { initializeDatabase } from "./src/database/initializeDatabase";
+import * as process from "process";
 
-const app = express();
-const port = process.env.PORT;
+const appSetup = () => {
+  const app = express();
+  const PORT = process.env.PORT;
+  //Middleware: Cors policy add allows all =>  Access-Control-Allow-Origin: *
+  app.use(cors());
 
-initializeDatabase().then(() =>
-  console.log("Database successfully initialized"),
-);
+  //Middleware: It parses incoming requests with JSON payloads and is based on body-parser.
+  app.use(express.json());
 
-//Middleware: Cors policy add allows all =>  Access-Control-Allow-Origin: *
-app.use(cors());
+  //Routes
+  app.use(authenticationApp);
+  //Protected Routes
+  app.use(jokeApp);
+  app.use(userApp);
 
-//Middleware: It parses incoming requests with JSON payloads and is based on body-parser.
-app.use(express.json());
+  app.get("/", (_: Request, res: Response) => {
+    res.send("Hello World!");
+  });
 
-//Routes
-app.use(authenticationApp);
-//Protected Routes
-app.use(jokeApp);
-app.use(userApp);
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+};
 
-app.get("/", (req, res) => {
-  res.send("Hello World " + req.protocol + req.hostname);
-});
-
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+initializeDatabase()
+  .then(appSetup)
+  .catch((error) => {
+    console.error("Error during database connection setup:", error);
+  });
