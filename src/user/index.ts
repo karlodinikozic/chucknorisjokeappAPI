@@ -1,5 +1,5 @@
 import express from "express";
-import authMiddleware from "../authentication/middleware/authMiddleware";
+import authMiddleware from "../authentication/middlewares/authMiddleware";
 import userRouter from "./routes/userRouter";
 
 const userApp = express();

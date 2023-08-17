@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { EmailValidationToken } from "../authentication/types";
 
-const SECRET = process.env.EMAIL_SECRET || "";
+const SECRET = process.env.EMAIL_SECRET || "-1";
 const jwtSignEmail = (payload: object) => {
   //TODO ABSTRACT THIS
   return jwt.sign(payload, SECRET, {

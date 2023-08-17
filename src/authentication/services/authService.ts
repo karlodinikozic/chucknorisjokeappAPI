@@ -35,8 +35,6 @@ const signup = async (signupInputDTO: SignupInputDTO) => {
       lastName,
     });
 
-    console.log(newUser);
-
     const jwtId = jwtHelper.jwtSignEmail({ id: newUser.id });
     await sendEmailVerification(email, jwtId);
 
@@ -87,6 +85,10 @@ const login = async ({ email, password }: LoginInputDTO) => {
     throw new Error("Invalid credentials");
   }
 
+  if (!user.isVerified) {
+    throw new Error("Please verify your email");
+  }
+
   const key = process.env.SECRET_KEY || "";
 
   const accessToken = jwt.sign({ id: user.id, email: user.email }, key, {
@@ -101,18 +103,18 @@ const resendEmail = async (email: string) => {
     throw new Error("Invalid email");
   }
   if (existingUser.isVerified) {
-    throw new Error(`User with id: ${existingUser.email} already verified`);
+    throw new Error(`User with email: ${existingUser.email} already verified`);
   }
 
   const token = jwtHelper.jwtSignEmail({ id: existingUser.id });
   try {
     await sendEmailVerification(email, token);
     return {
-      messege: `Thank you for registering. We have sent an email to ${email} for verification. `,
+      messege: `Thank you for registering. We have resent an email to ${email} for verification. `,
     };
   } catch (e) {
     throw new Error(
-        "An error occurred while resending verification email to user.\n Error:" + e,
+      "An error occurred while resending verification email to user.\n Error:" + e,
     );
   }
 };

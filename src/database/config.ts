@@ -6,6 +6,12 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASSWORD || "root_password", // Your MySQL password
   host: process.env.DB_HOST || "db", // The name of the MySQL service in your Docker Compose
   dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
 });
 
 export { sequelize };

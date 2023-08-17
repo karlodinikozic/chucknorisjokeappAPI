@@ -1,6 +1,6 @@
 import express from "express";
 import jokeRouter from "./routes/jokeRouter";
-import authMiddleware from "../authentication/middleware/authMiddleware";
+import authMiddleware from "../authentication/middlewares/authMiddleware";
 
 const jokeApp = express();
 
