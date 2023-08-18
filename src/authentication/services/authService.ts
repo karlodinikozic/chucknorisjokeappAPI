@@ -75,7 +75,7 @@ class AuthService implements IAuthService {
     if (!user.isVerified) {
       throw new Error("Please verify your email");
     }
-    const accessToken = jwtHelper.jwtSignEmail({ id: user.id, email: user.email })
+    const accessToken = jwtHelper.jwtSignAccessToken({ id: user.id, email: user.email })
 
     return { accessToken };
   };

@@ -5,7 +5,6 @@ const EMAIL_SECRET = process.env.EMAIL_SECRET || "-1";
 const PASSWORD_SECRET = process.env.SECRET_KEY || "-1";
 
 const jwtSignEmail = (payload: object) => {
-  //TODO ABSTRACT THIS
   return jwt.sign(payload, EMAIL_SECRET, {expiresIn: "30d"});
 };
 

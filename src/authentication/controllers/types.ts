@@ -1,6 +1,4 @@
-import { Request, Response } from "express";
-
-type defaultResponseHandler = (req: Request, res: Response) => Promise<Response>;
+import {defaultResponseHandler} from "../../functions/createControllerResponse";
 
 interface IAuthController {
     signup: defaultResponseHandler

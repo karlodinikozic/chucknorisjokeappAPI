@@ -1,7 +1,10 @@
 import express from "express";
-import jokeController from "../controllers/jokeController";
+import {Container} from "typedi";
+import JokeController from "../controllers/jokeController";
 
 const jokeRouter = express.Router();
+
+const jokeController = Container.get(JokeController)
 
 jokeRouter.get("/", jokeController.getJoke);
 

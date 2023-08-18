@@ -1,12 +1,20 @@
 import { Request } from "express";
-import { User } from "../models/User";
+import { Container, Service } from "typedi";
+import UserRepository from "../repositories/userRepository";
+import IUserService from "./types";
+import UserType from "../models/types";
 
-const getLoggedInUser = (req: Request) => {
-  return req.user;
-};
+@Service()
+class UserService implements IUserService {
+  private readonly UserRepository = Container.get(UserRepository);
 
-const getAllUsers = async () => {
-  return await User.findAll();
-};
+  public getLoggedInUser = (req: Request) => {
+    return req.user as UserType;
+  };
 
-export default { getLoggedInUser, getAllUsers };
+  public getAllUsers = async () => {
+    return await this.UserRepository.findAll();
+  };
+}
+
+export default UserService;

@@ -5,13 +5,9 @@ import {Container} from "typedi";
 
 const authRouter: Router = express.Router();
 
-const authController = Container.get(AuthController)// NEED DI container
+const authController = Container.get(AuthController)
 
-authRouter.post(
-  "/signup",
-  authMiddleware.validateSignup,
-  authController.signup,
-);
+authRouter.post("/signup", authMiddleware.validateSignup, authController.signup);
 
 authRouter.post("/login", authMiddleware.validateLogin, authController.login);
 

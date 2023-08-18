@@ -1,9 +1,13 @@
-import { Request, Response } from "express";
-import jokeService from "../services/jokeService";
+import { Container, Service } from "typedi";
+import JokeService from "../services/jokeService";
+import { createDefaultRequestWithEmptyBodyResponse } from "../../functions/createControllerResponse";
+import IJokeService from "../services/types";
+import IJokeController from "./types";
 
-const getJoke = async (_: Request, res: Response) => {
-  return res.json(await jokeService.getJoke());
-};
+@Service()
+class JockController implements  IJokeController{
+  private jokeService: IJokeService = Container.get(JokeService);
+  public getJoke = createDefaultRequestWithEmptyBodyResponse(this.jokeService.getJoke);
+}
 
-
-export default {getJoke}
+export default JockController;
