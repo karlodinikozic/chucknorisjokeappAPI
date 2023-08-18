@@ -1,48 +1,34 @@
 import { Request, Response } from "express";
-import authService from "../services/authService";
+import IAuthService from "../services/types";
+import IAuthController from "./types";
 
-const signup = async (req: Request, res: Response) => {
-  try {
-    const jsonResponse = await authService.signup(req.body);
-    return res.json(jsonResponse);
-  } catch (error) {
-    const errorMessage = String(error);
-    return res.status(400).json({ error: errorMessage });
+
+
+class AuthController implements IAuthController{
+  private readonly authService: IAuthService;
+
+  public signup;
+  public login;
+  public verifyEmail;
+  public resendEmail;
+
+
+  constructor(authService: IAuthService) {
+    this.authService = authService;
+    this.signup  = this.createDefaultAuthResponse(this.authService.signup)
+    this.login  = this.createDefaultAuthResponse(this.authService.login)
+    this.verifyEmail  = this.createDefaultAuthResponse(this.authService.verifyEmail)
+    this.resendEmail  = this.createDefaultAuthResponse(this.authService.resendEmail)
   }
-};
 
-const login = async (req: Request, res: Response) => {
-  try {
-    const jsonResponse = await authService.login(req.body);
-    return res.json(jsonResponse);
-  } catch (error) {
-    console.error(error);
-    const errorMessage = String(error);
-    return res.status(400).json({ error: errorMessage });
-  }
-};
+  private createDefaultAuthResponse <T,K>(handleFunction: (data:T)=>Promise<K>) {
+    return async (req: Request, res: Response)=>{
+      try {
+        return res.json(await handleFunction(req.body));
+      } catch (error) {
+        return res.status(400).json({ error:  String(error)});
+    }
+  }}
 
-const verifyEmail = async (req: Request, res: Response) => {
-  const { id } = req.body;
-  try {
-    const jsonResponse = await authService.verifyEmail(id);
-    return res.json(jsonResponse);
-  } catch (error) {
-    console.error(error);
-    const errorMessage = String(error);
-    return res.status(400).json({ error: errorMessage });
-  }
-};
-
-const resendEmail = async (req: Request, res: Response) => {
-  try {
-    const jsonResponse = await authService.resendEmail(req.body.email);
-    return res.json(jsonResponse);
-  } catch (error) {
-    console.error(error);
-    const errorMessage = String(error);
-    return res.status(400).json({ error: errorMessage });
-  }
-};
-
-export default { signup, login, verifyEmail, resendEmail };
+}
+export default AuthController;

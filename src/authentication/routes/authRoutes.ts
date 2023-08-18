@@ -1,8 +1,11 @@
 import express, { Router } from "express";
-import authController from "../controllers/authController";
 import authMiddleware from "../middlewares/authMiddleware";
+import AuthController from "../controllers/authController";
+import AuthService from "../services/authService";
 
 const authRouter: Router = express.Router();
+
+const authController = new AuthController(new AuthService()) // NEED DI container
 
 authRouter.post(
   "/signup",

@@ -20,7 +20,7 @@ describe("Authentication ", () => {
           lastName: "Account",
         };
         const expectedOutput = {
-          messege: `Thank you for registering. We have sent an email to ${mockSignupInput.email} for verification. `,
+          message: `Thank you for registering. We have sent an email to ${mockSignupInput.email} for verification. `,
         };
 
         //When
@@ -273,7 +273,7 @@ describe("Authentication ", () => {
         await User.create({ ...mockSignupInput });
 
         const expectedOutput = {
-          messege: `Thank you for registering. We have resent an email to ${mockSignupInput.email} for verification. `,
+          message: `Thank you for registering. We have resent an email to ${mockSignupInput.email} for verification. `,
         };
         //When
         const res = await supertest(app)
