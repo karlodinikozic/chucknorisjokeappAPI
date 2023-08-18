@@ -6,9 +6,7 @@ const getLoggedInUser = (req: Request) => {
 };
 
 const getAllUsers = async () => {
-  const users = await User.findAll();
-  console.log(users);
-  return users;
+  return await User.findAll();
 };
 
 export default { getLoggedInUser, getAllUsers };

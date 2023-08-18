@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize({
+
   database: process.env.DB_NAME || "chucknoris", // Your database name
   username: process.env.DB_USER || "root", // Your MySQL username
   password: process.env.DB_PASSWORD || "root_password", // Your MySQL password

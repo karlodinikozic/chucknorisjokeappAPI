@@ -1,13 +1,19 @@
-type SignupInputDTO = {
+type EmailInputDTO = {
   email: string;
+};
+
+type UserIdInputDTO = {
+  userId: string;
+};
+
+type SignupInputDTO = EmailInputDTO & {
   password: string;
   firstName: string;
   lastName: string;
 };
 
-type LoginInputDTO = {
-    email: string;
-    password: string;
-}
+type LoginInputDTO = EmailInputDTO & {
+  password: string;
+};
 
-export { SignupInputDTO, LoginInputDTO };
+export { SignupInputDTO, LoginInputDTO, EmailInputDTO, UserIdInputDTO };

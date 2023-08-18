@@ -46,10 +46,9 @@ const extractUserIdFromEmailValidationToken = (
       new Error("Missing param token");
     }
 
-    req.body.id = jwtHelper.jwtVerifyEmail(token);
+    req.body.userId = jwtHelper.jwtVerifyEmail(token);
     next();
   } catch (e) {
-    console.error(e);
     const errorMessage = String(e);
     return res.status(400).json({ error: errorMessage });
   }

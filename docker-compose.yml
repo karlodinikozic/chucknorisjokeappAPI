@@ -8,6 +8,8 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    env_file:
+      - .env.development.local
     environment:
       PORT: 3000
       FULL_URL: http://localhost:3000/
@@ -17,7 +19,6 @@ services:
       #EMAIL
       EMAIL_SECRET: EMAILSECRETECHUCKNORIS
       EMAIL_USER: mailzaslanjepostenodeexpress@gmail.com
-      EMAIL_KEY: xsmtpsib-35b983fe7d9cedda9f67c0d112317d589f6551a92a5d94404a8536379b249c76-gdXftG95cvSHFkEK
       EMAIL_PORT: 587
       EMAIL_HOST: smtp-relay.brevo.com
 
@@ -40,3 +41,4 @@ services:
       - db-data:/var/lib/mysql
 volumes:
   db-data:
+

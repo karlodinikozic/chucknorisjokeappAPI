@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+import 'reflect-metadata';
+
 
 dotenv.config(); // * Importing Environment variables
 import "./config/passport.config"; // * Passport Config
