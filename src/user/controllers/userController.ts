@@ -9,9 +9,11 @@ import UserService from "../services/userService";
 class UserController implements IUserController {
   private readonly userService: IUserService = Container.get(UserService);
 
-  public getAllUsers = createDefaultRequestWithEmptyBodyResponse(
-    this.userService.getAllUsers,
-  );
+  public getAllUsers = createDefaultRequestWithEmptyBodyResponse(this.userService.getAllUsers,);
+
+  constructor() {
+    this.getLoggedInUser = this.getLoggedInUser.bind(this);
+  }
 
   public async getLoggedInUser(req: Request, res: Response) {
     try {
