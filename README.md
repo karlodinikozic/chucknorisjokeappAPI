@@ -92,8 +92,6 @@ To start the API in a Docker container, use the following command:
 docker-compose up
 ```
 
-This command will launch the API in a Docker container, simplifying deployment and management.
-
 
 ### Development
 
