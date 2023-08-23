@@ -12,6 +12,7 @@ export const connectToDb = async () => {
 
 export const closeConnectionToDB = async () => {
   try {
+    console.log('Database connection closed.');
     await sequelize.close();
   } catch (e) {
     console.error(e);

@@ -9,25 +9,11 @@ services:
     depends_on:
       - db
     env_file:
-      - .env.development.local
+      - .env
     environment:
       PORT: 3000
       FULL_URL: http://localhost:3000/
-      SECRET_KEY: CHUCKNORIS
-      JOKE_API_URL: https://api.chucknorris.io/
-
-      #EMAIL
-      EMAIL_SECRET: EMAILSECRETECHUCKNORIS
-      EMAIL_USER: mailzaslanjepostenodeexpress@gmail.com
-      EMAIL_PORT: 587
-      EMAIL_HOST: smtp-relay.brevo.com
-
-      #DB
       DB_HOST: db
-      DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: root_password
-      DB_NAME: chucknoris
 
   db:
     image: mysql:latest
