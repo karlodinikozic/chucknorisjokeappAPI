@@ -9,7 +9,7 @@ dotenv.config()
 class EmailSender {
 
   public transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
+    service: process.env.EMAIL_HOST,
     port: Number.parseInt(process.env.EMAIL_PORT || "-1"),
     secure: false, // upgrade later with STARTTLS
     auth: {
