@@ -24,64 +24,6 @@ To get started with the Chuck Norris Joke App API, follow these steps:
    yarn install
    ```
 
-## Usage
-
-### Development
-
-To run the API in development mode with automatic code reloading, use the following command:
-
-```shell
-yarn dev
-```
-
-This will start the API server and automatically restart it whenever you make changes to the code.
-
-### Production
-
-For production use, you can build and start the API with these commands:
-
-```shell
-yarn build
-yarn start
-```
-
-### Docker
-
-You can also run the Chuck Norris Joke App API in a Docker container with Docker Compose. Ensure you have Docker and Docker Compose installed, and then use the following commands:
-
-1. Build the Docker container:
-
-   ```shell
-   docker-compose build
-   ```
-
-2. Start the API in the Docker container:
-
-   ```shell
-   docker-compose up
-   ```
-
-This will launch the API in a Docker container, making it easy to deploy and manage.
-
-### Testing
-
-You can run tests for the Chuck Norris Joke App API with the following command:
-
-```shell
-yarn test
-```
-
-Please make sure the database is running as mentioned above to ensure the tests can access the required database connection.
-**Note:** It is recommended to run the database using Docker Compose. You can do this by running:
-
-```shell
-docker-compose up db
-```
-
-This ensures that the necessary database connection is available for the tests to run properly.
-
-
-
 ## Configuration
 
 The API uses environment variables for configuration. Create a `.env` file in the project root directory and define the following variables:
@@ -105,6 +47,65 @@ For database configuration:
 - `DB_NAME`:  The name of the MySQL database.
 - `DB_USER`:  The username for connecting to the MySQL database.
 - `DB_PASSWORD`: The password for connecting to the MySQL database.
+
+
+## Usage
+
+**Note:** To run application properly database connection is required
+
+### Docker
+
+You can also run the Chuck Norris Joke App API in a Docker container with Docker Compose. Ensure you have Docker and Docker Compose installed, and then use the following commands:
+
+1. Start the API in the Docker container:
+
+   ```shell
+   docker-compose up
+   ```
+
+This will launch the API in a Docker container, making it easy to deploy and manage.
+
+
+### Development
+
+To run the API in development mode with automatic code reloading, use the following command:
+
+
+
+```shell
+yarn dev
+```
+
+This will start the API server and automatically restart it whenever you make changes to the code.
+
+### Production
+
+For production use, you can build and start the API with these commands:
+
+```shell
+yarn build
+yarn start
+```
+
+### Testing
+
+You can run tests for the Chuck Norris Joke App API with the following command:
+
+```shell
+yarn test
+```
+
+Please make sure the database is running as mentioned above to ensure the tests can access the required database connection.
+**Note:** It is recommended to run the database using Docker Compose. You can do this by running:
+
+```shell
+docker-compose up db
+```
+
+This ensures that the necessary database connection is available for the tests to run properly.
+
+
+
 
 
 ## License
