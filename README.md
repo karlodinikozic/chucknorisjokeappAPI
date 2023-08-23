@@ -135,6 +135,24 @@ This ensures that the necessary database connection is available for the tests t
 
 
 
+## Importing Postman Environment and Collection
+
+Inside the `/postman` directory, you will find three important files for configuring and testing the Chuck Norris Joke App API in Postman:
+
+### Environment Files:
+
+- `JockApp.localDocker.postman_environment.json`
+- `JokeApp.local.postman_environment.json`
+
+These environment files contain predefined variables and configurations to simplify API testing in different setups.
+
+### Collection File:
+
+- `JokeApp.postman_collection.json`
+
+This collection file contains a set of API requests organized for easy testing and usage.
+
+
 
 
 ## License
