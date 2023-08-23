@@ -1,6 +1,7 @@
 # Chuck Norris Joke App API
 
-Welcome to the Chuck Norris Joke App API - an entertaining RESTful API designed to deliver random Chuck Norris jokes.
+Welcome to the Chuck Norris Joke App API - an entertaining RESTful API designed to deliver 
+random Chuck Norris jokes.
 
 ## Installation
 
@@ -26,7 +27,8 @@ To get started with the Chuck Norris Joke App API, follow these steps:
 
 ## Configuration
 
-The API uses environment variables for configuration. Create a `.env` file in the project root directory and define the following variables:
+The API uses environment variables for configuration. Create a `.env` file in the project root 
+directory and define the following variables:
 
 General:
 
@@ -53,17 +55,44 @@ For database configuration:
 
 **Note:** To run application properly database connection is required
 
-### Docker
 
-You can also run the Chuck Norris Joke App API in a Docker container with Docker Compose. Ensure you have Docker and Docker Compose installed, and then use the following commands:
+## Docker
 
-1. Start the API in the Docker container:
+You can run the Chuck Norris Joke App API in a Docker container using Docker Compose. 
+Make sure you have Docker and Docker Compose installed, and then follow these steps:
+
+### First-time Setup
+
+**Note:** The first-time run of `docker-compose up` may result in a MySQL server signal error, 
+causing the Express server to receive a connection refusal. This can be resolved in two simple ways:
+
+Add `restart: unless-stopped` to the `docker-compose.yml` file in the `services -> app` section.
+
+#### or
+
+Run the following commands separately:
 
    ```shell
-   docker-compose up
+   docker-compose up db
    ```
 
-This will launch the API in a Docker container, making it easy to deploy and manage.
+followed by
+
+   ```shell
+   docker-compose up app
+   ```
+
+Afterward, you can use `docker-compose up` as usual.
+
+### Starting the API in Docker
+
+To start the API in a Docker container, use the following command:
+
+```shell
+docker-compose up
+```
+
+This command will launch the API in a Docker container, simplifying deployment and management.
 
 
 ### Development

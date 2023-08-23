@@ -14,7 +14,7 @@ describe("Authentication ", () => {
       it("should return 200", async () => {
         //Given
         const mockSignupInput: SignupInputDTO = {
-          email: `test${Math.random() * 10000 + 1}@email.com`,
+          email: `testSignUpGood@email.com`,
           password: "Testaccunt1!",
           firstName: "Test",
           lastName: "Account",
